@@ -1,7 +1,6 @@
 import * as types from '../constants/ActionTypes';
 
-var data = {
-    tasks :[
+var initialState = [
         {
             id : 1,
             name : 'Niên luận',
@@ -18,18 +17,17 @@ var data = {
             status : true
         }
     ]
-}
-const todo = (state = data, action) => {
-    
+
+const todo = (state = initialState, action) => {
     switch (action.type) {
         case types.ADD_TASK:     
-            state = [...state.tasks,action.task];
-            return state;  
+            state = [...state,action.task];
+            return [...state] 
         case types.GET_ALL_TASK:
             console.log(state,"get all");
-            return {...state};              
+            return [...state]              
         default:
-            return {...state};
+            return [...state]
     }
 };
 export default todo;

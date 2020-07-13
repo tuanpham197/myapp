@@ -41,7 +41,6 @@ class TaskList extends Component {
         this.props.addTask(this.state.task);
     }
     render() {   
-        console.log(this.props.tasks);
         return (
             <div>
                <div>
@@ -59,7 +58,7 @@ class TaskList extends Component {
 }
 const mapStateToProps = (state)=>{
     return {
-        tasks : state.task.tasks
+        tasks : state.task
     }
 }
 const mapDispatchToProps = (dispatch,props) => {
