@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import Task from './Task';
 import * as actions from '../actions/index'
-import {  DatePicker } from "antd";
+import {  DatePicker,Table } from "antd";
+import style from '../index.css'
 
 class TaskList extends Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class TaskList extends Component {
             }
         }
     }
+    
     showTasks = ()=>{    
 
         return this.props.posts.map((e)=>{
@@ -43,17 +45,36 @@ class TaskList extends Component {
         event.preventDefault();
         this.props.addTask(this.state.task);
     }
-    render() {   
+    render() {  
+        const columns = [
+            {
+                title: 'ID',
+                dataIndex: 'id',
+                key: 'id',
+            },
+            {
+              title: 'Name',
+              dataIndex: 'name',
+              key: 'name',
+            },
+            {
+              title: 'Image',
+              dataIndex: 'image',
+              key: 'image',
+            },
+            
+          ]; 
+
         return (
-            <div >
+            <div className='wrapper'>
                <div>
                    <form onSubmit={this.handleSubmit}>
                        <input type="text" placeholder="Nhập task" name="nametask" onChange={this.handleChange} />
                        <input type="submit" value="add"/>
                    </form>
                    <div>
-                        <DatePicker />
-                        {this.showTasks()}
+                    <Table dataSource={this.props.posts} columns={columns} />;
+                        
                    </div>
                </div>
             </div>
