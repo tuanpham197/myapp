@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 
 import {connect} from 'react-redux'
-import Task from './Task';
-import AddPost from './AddPost';
-
+import TaskList from './TaskList';
 import * as actions from '../actions/index'
 import {  DatePicker,Table,Layout, Menu, Breadcrumb,Card, Row } from "antd";
 import style from '../index.css';
 
-
+import AddPost from './AddPost';
 import {
     BrowserRouter as Router,
     Switch,
@@ -17,12 +15,11 @@ import {
   } from "react-router-dom";
 
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import About from './About';
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 const { Meta } = Card;
 
-class TaskList extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -63,25 +60,8 @@ class TaskList extends Component {
         this.props.addTask(this.state.task);
     }
     render() {  
-        const columns = [
-            {
-                title: 'ID',
-                dataIndex: 'id',
-                key: 'id',
-            },
-            {
-              title: 'Name',
-              dataIndex: 'name',
-              key: 'name',
-            },
-            {
-              title: 'Image',
-              dataIndex: 'image',
-              key: 'image',
-            },
-            
-          ]; 
-        console.log(this.props.posts);
+        
+
         return (
             <Router>
                 <Layout>
@@ -105,26 +85,26 @@ class TaskList extends Component {
                         >
                             <SubMenu key="sub1" icon={<UserOutlined />} title="Options">
                                 <Menu.Item key="1">
-                                    <Link to="/">List </Link>
+                                    <Link to="/">List Actor</Link>
                                 </Menu.Item>
-                                <Menu.Item key="2">
-                                    <Link to="/add">Add new</Link>
+                                <Menu.Item key="2">Add New</Menu.Item>
+                                <Menu.Item key="3">
+                                    <Link to="/add">Home</Link>
                                 </Menu.Item>
-                                
                             </SubMenu>
                             
                         </Menu>
                         </Sider>
                         <Content style={{ padding: '0 24px', minHeight: 280 }}>
+
                         <Switch>
+                            <Route path="/">
+                                <TaskList />
+                            </Route>
                             <Route path="/add">
                                 <AddPost />
                             </Route>
-                            <Route path="/">
-                                <About />
-                            </Route>
                         </Switch>
-                            
                         </Content>
                     </Layout>
                     </Content>
@@ -136,20 +116,5 @@ class TaskList extends Component {
         )
     }
 }
-const mapStateToProps = (state)=>{
-    return {
-        tasks : state.task,
-        posts : state.post
-    }
-}
-const mapDispatchToProps = (dispatch,props) => {
-    return {
-        addTask : (task)=>{
-            dispatch(actions.addTask(task));
-        },
-        getAllTask : ()=>{
-            dispatch(actions.getAllTask());
-        }
-    }
-  }
-export default connect(mapStateToProps,mapDispatchToProps)(TaskList);
+
+export default connect(null,null)(Home);

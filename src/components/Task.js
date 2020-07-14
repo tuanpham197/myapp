@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 import {connect} from 'react-redux'
-import { Button, DatePicker, version } from "antd";
+import { Card, Row, Col,Button } from "antd";
 import * as actions from '../actions/index'
-
+const { Meta } = Card;
 class Task extends Component {
     constructor(props) {
         super(props);
@@ -14,10 +14,19 @@ class Task extends Component {
     render() {   
 
         return (
-            <div>
-                <li>id : {this.props.id} --  name : {this.props.name} <button onClick={()=>this.deletePost(this.props.id)}>Delete</button></li>
-            </div>
-            
+
+            <Col span={6}>
+                <Card
+                    hoverable
+                    style={{ width: 240 }}
+                    cover={<img alt="example" src={this.props.image} />}
+                >
+                    <Meta title={this.props.name} description="" />
+                    <Button type="primary" danger style={{ marginTop: 10 }} onClick={()=>this.deletePost(this.props.id)}>
+                        Delete
+                    </Button>
+                </Card>
+            </Col>    
         )
     }
 }

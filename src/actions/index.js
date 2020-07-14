@@ -25,3 +25,9 @@ export const deletePost = (idPost)=>{
         idPost
     }
 }
+export const addPost = (post)=>{
+    return {
+        type : types.ADD_POST,
+        post
+    }
+}
