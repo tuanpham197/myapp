@@ -6,3 +6,22 @@ export const addTask = (task)=>{
         task
     }
 }
+export const getAllTask = ()=>{
+    return {
+        type : types.GET_ALL_TASK
+    }
+}
+
+export const getPost = (posts)=>{
+    return {
+        type : types.GET_POST,
+        posts
+    }
+}
+
+export const deletePost = (idPost)=>{
+    return {
+        type : types.DELETE_POST,
+        idPost
+    }
+}

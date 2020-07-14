@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import Task from './Task';
 import * as actions from '../actions/index'
-
+import {  DatePicker } from "antd";
 
 class TaskList extends Component {
     constructor(props) {
@@ -16,8 +16,8 @@ class TaskList extends Component {
         }
     }
     showTasks = ()=>{    
-        console.log(this.props.tasks,"task");    
-        return this.props.tasks.map((e)=>{
+
+        return this.props.posts.map((e)=>{
             return <Task
                         id = {e.id}
                         name= {e.name}
@@ -28,9 +28,12 @@ class TaskList extends Component {
         })
     }
     handleChange = (event)=>{
+        var arrId = this.props.tasks.map(e=>{
+            return e.id;
+        })
         this.setState({
             task: {
-                id : this.props.tasks.length+1,
+                id : Math.max(...arrId) +1,
                 name : event.target.value
             }
         });
@@ -42,13 +45,14 @@ class TaskList extends Component {
     }
     render() {   
         return (
-            <div>
+            <div >
                <div>
                    <form onSubmit={this.handleSubmit}>
                        <input type="text" placeholder="Nhập task" name="nametask" onChange={this.handleChange} />
                        <input type="submit" value="add"/>
                    </form>
                    <div>
+                        <DatePicker />
                         {this.showTasks()}
                    </div>
                </div>
@@ -58,13 +62,17 @@ class TaskList extends Component {
 }
 const mapStateToProps = (state)=>{
     return {
-        tasks : state.task
+        tasks : state.task,
+        posts : state.post
     }
 }
 const mapDispatchToProps = (dispatch,props) => {
     return {
         addTask : (task)=>{
             dispatch(actions.addTask(task));
+        },
+        getAllTask : ()=>{
+            dispatch(actions.getAllTask());
         }
     }
   }

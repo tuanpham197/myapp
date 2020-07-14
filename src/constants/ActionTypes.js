@@ -1,2 +1,5 @@
 export const ADD_TASK = 'ADD_TASK';
 export const GET_ALL_TASK = 'GET_ALL_TASK';
+export const COUNT_TASK = 'COUNT_TASK';
+export const GET_POST = 'GET_POST';
+export const DELETE_POST = 'DELETE_POST';

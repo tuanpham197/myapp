@@ -24,8 +24,7 @@ const todo = (state = initialState, action) => {
             state = [...state,action.task];
             return [...state] 
         case types.GET_ALL_TASK:
-            console.log(state,"get all");
-            return [...state]              
+            return [...state];             
         default:
             return [...state]
     }
