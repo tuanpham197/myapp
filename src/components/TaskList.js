@@ -7,7 +7,7 @@ import AddPost from './AddPost';
 import * as actions from '../actions/index'
 import {  DatePicker,Table,Layout, Menu, Breadcrumb,Card, Row } from "antd";
 import style from '../index.css';
-
+import Example from './Loading';
 
 import {
     BrowserRouter as Router,
@@ -34,8 +34,8 @@ class TaskList extends Component {
     }
     
     showTasks = ()=>{    
-     
-        return this.props.posts.map((e)=>{
+
+        return this.props.posts.pos.map((e)=>{
             return <Task
                         id = {e.id}
                         name= {e.name}
@@ -63,25 +63,6 @@ class TaskList extends Component {
         this.props.addTask(this.state.task);
     }
     render() {  
-        const columns = [
-            {
-                title: 'ID',
-                dataIndex: 'id',
-                key: 'id',
-            },
-            {
-              title: 'Name',
-              dataIndex: 'name',
-              key: 'name',
-            },
-            {
-              title: 'Image',
-              dataIndex: 'image',
-              key: 'image',
-            },
-            
-          ]; 
-        console.log(this.props.posts);
         return (
             <Router>
                 <Layout>
@@ -116,14 +97,12 @@ class TaskList extends Component {
                         </Menu>
                         </Sider>
                         <Content style={{ padding: '0 24px', minHeight: 280 }}>
-                        <Switch>
-                            <Route path="/add">
-                                <AddPost />
-                            </Route>
-                            <Route path="/">
-                                <About />
-                            </Route>
-                        </Switch>
+                        {1==2 ? <Example /> : <Switch>
+                            <Route path="/add" component={AddPost} />
+                            <Route path="/" component={About} />
+                               
+                        </Switch>}
+                        
                             
                         </Content>
                     </Layout>

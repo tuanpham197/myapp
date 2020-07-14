@@ -6,7 +6,9 @@ const post = (state = initialState, action) => {
     switch (action.type) {
         case types.GET_POST:
             state = action.json;
-            return [...state];  
+            return [...state] 
+        case types.RECEIVE_POST:
+            return [...state] 
         case types.ADD_POST:
             console.log(action,"hello");
             state = [...state,action.post];

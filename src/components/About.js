@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 
 import {connect} from 'react-redux'
 import Task from './Task';
-import AddPost from './AddPost';
+
 
 import * as actions from '../actions/index'
-import {  DatePicker,Table,Layout, Menu, Breadcrumb,Card, Row } from "antd";
-import style from '../index.css';
+import {   Row } from "antd";
 
+import ReactLoading from 'react-loading';
 
 class About extends Component {
     constructor(props) {
@@ -50,24 +50,7 @@ class About extends Component {
         this.props.addTask(this.state.task);
     }
     render() {  
-        const columns = [
-            {
-                title: 'ID',
-                dataIndex: 'id',
-                key: 'id',
-            },
-            {
-              title: 'Name',
-              dataIndex: 'name',
-              key: 'name',
-            },
-            {
-              title: 'Image',
-              dataIndex: 'image',
-              key: 'image',
-            },
-            
-          ]; 
+      console.log(this.props.posts); 
 
         return (  
             <Row>
