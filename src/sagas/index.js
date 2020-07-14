@@ -20,8 +20,9 @@ function* deletePost(data)
 }
 function* addPost(data)
 {
+    console.log(data.post.createat._d);
     let post = {
-        name : "abc",
+        name : data.post.username,
         avatar : "anh.png",
         createdAt: "2020-07-13T03:55:55.185Z"
     };
