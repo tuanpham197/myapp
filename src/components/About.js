@@ -5,7 +5,7 @@ import Task from './Task';
 
 
 import * as actions from '../actions/index'
-import {   Row } from "antd";
+import {   Row ,Pagination} from "antd";
 
 import ReactLoading from 'react-loading';
 
@@ -16,13 +16,34 @@ class About extends Component {
             task : {
                 id : '',
                 name : ''
-            }
+            },
+            numberPage :{
+                start: 0,
+                end : 8
+            },
         }
     }
-    
+    handleChangePage = value => {
+        console.log(value);
+        if (value <= 1) {
+          this.setState({
+            numberPage :{
+                start: 0,
+                end : 7
+            }
+          });
+        } else {
+          this.setState({
+            numberPage :{
+                start: (value-1)*8,
+                end : value * 8
+            }
+          });
+        }
+      };
     showTasks = ()=>{    
-     
-        return this.props.posts.map((e)=>{
+        console.log("showTasks");
+        return this.props.posts.slice(this.state.numberPage.start,this.state.numberPage.end).map((e)=>{
             return <Task
                         id = {e.id}
                         name= {e.name}
@@ -50,19 +71,28 @@ class About extends Component {
         this.props.addTask(this.state.task);
     }
     render() {  
-      console.log(this.props.posts); 
+  
 
-        return (  
-            <Row>
-                {this.showTasks()}
-            </Row>  
+        return ( 
+            <div>
+                <Row>
+                    {this.showTasks()}
+                </Row> 
+                <Pagination
+                    defaultCurrent={1}
+                    defaultPageSize={8}
+                    onChange={this.handleChangePage}
+                    total={this.props.posts.length}
+                />
+            </div> 
+             
         )
     }
 }
 const mapStateToProps = (state)=>{
     return {
         tasks : state.task,
-        posts : state.post
+        posts : state.post.post
     }
 }
 const mapDispatchToProps = (dispatch,props) => {
@@ -70,8 +100,8 @@ const mapDispatchToProps = (dispatch,props) => {
         addTask : (task)=>{
             dispatch(actions.addTask(task));
         },
-        getAllTask : ()=>{
-            dispatch(actions.getAllTask());
+        getPost : ()=>{
+            dispatch(actions.getPost());
         }
     }
   }

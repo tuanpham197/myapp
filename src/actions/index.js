@@ -12,10 +12,9 @@ export const getAllTask = ()=>{
     }
 }
 
-export const getPost = (posts)=>{
+export const getPost = ()=>{
     return {
-        type : types.GET_POST,
-        posts
+        type : types.GET_POST
     }
 }
 

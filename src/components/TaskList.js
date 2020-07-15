@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 
 import {connect} from 'react-redux'
-import Task from './Task';
 import AddPost from './AddPost';
 
 import * as actions from '../actions/index'
-import {  DatePicker,Table,Layout, Menu, Breadcrumb,Card, Row } from "antd";
-import style from '../index.css';
+import {  Layout, Menu, Card ,Pagination} from "antd";
+
 import Example from './Loading';
 
 import {
@@ -16,8 +15,9 @@ import {
     Link
   } from "react-router-dom";
 
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import About from './About';
+
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 const { Meta } = Card;
@@ -32,20 +32,10 @@ class TaskList extends Component {
             }
         }
     }
-    
-    showTasks = ()=>{    
-
-        return this.props.posts.pos.map((e)=>{
-            return <Task
-                        id = {e.id}
-                        name= {e.name}
-                        image= {e.avatar}
-                        key = {e.id}
-                    >
-
-                </Task>
-        })
-    }
+    componentDidMount(){
+        this.props.getPost();
+    }   
+   
     handleChange = (event)=>{
         var arrId = this.props.tasks.map(e=>{
             return e.id;
@@ -62,16 +52,18 @@ class TaskList extends Component {
         event.preventDefault();
         this.props.addTask(this.state.task);
     }
+    
     render() {  
+        console.log(this.state);
         return (
             <Router>
                 <Layout>
                     <Header className="header">
                     <div className="logo" />
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                        <Menu.Item key="1">nav 1</Menu.Item>
-                        <Menu.Item key="2">nav 2</Menu.Item>
-                        <Menu.Item key="3">nav 3</Menu.Item>
+                        <Menu.Item key="1">Home</Menu.Item>
+                        <Menu.Item key="2">About</Menu.Item>
+                        <Menu.Item key="3">Link</Menu.Item>
                     </Menu>
                     </Header>
                     <Content style={{ padding: '0 50px' }}>
@@ -97,12 +89,17 @@ class TaskList extends Component {
                         </Menu>
                         </Sider>
                         <Content style={{ padding: '0 24px', minHeight: 280 }}>
-                        {1==2 ? <Example /> : <Switch>
+                        {this.props.posts.loading ? <Example /> : <Switch>
                             <Route path="/add" component={AddPost} />
                             <Route path="/" component={About} />
                                
                         </Switch>}
-                        
+                        {/* <Pagination
+                            defaultCurrent={1}
+                            defaultPageSize={8}
+                            onChange={this.handleChangePage}
+                            total={15}
+                        /> */}
                             
                         </Content>
                     </Layout>
@@ -128,6 +125,9 @@ const mapDispatchToProps = (dispatch,props) => {
         },
         getAllTask : ()=>{
             dispatch(actions.getAllTask());
+        },
+        getPost : ()=>{
+            dispatch(actions.getPost());
         }
     }
   }

@@ -1,14 +1,17 @@
 import { put, takeLatest,takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 import * as types from '../constants/ActionTypes';
+import callApi from '../common/CallApi';
 
-function* getPost(){ 
-    var dataResponse = yield axios.get('https://5f0d135111b7f6001605659d.mockapi.io/post')
-        .then(res=>{
-            return res;
-        })
+function* fetchData(){ 
+    console.log("call api");
+    var dataResponse = yield callApi('https://5f0d135111b7f6001605659d.mockapi.io/post','GET');
 
-    yield put({type:'GET_POST',json :dataResponse.data});
+    yield put({type:'RECEIVE_POST',json :dataResponse.data});
+}
+function* actionWatcher() {
+    console.log("receive post -saga");
+    yield takeLatest('GET_POST', fetchData);
 }
 function* deletePost(data)
 {
@@ -18,6 +21,10 @@ function* deletePost(data)
         });
 
 }
+/***
+ * add new post
+ * @param data
+ * ***/
 function* addPost(data)
 {
     console.log(data.post.createat._d);
@@ -29,6 +36,7 @@ function* addPost(data)
     axios.post('https://5f0d135111b7f6001605659d.mockapi.io/post', post)
       .then(function (response) {
         console.log(response);
+
       })
       .catch(function (error) {
         console.log(error);
@@ -38,8 +46,9 @@ function* addPost(data)
 export default function* rootSaga() {
     yield takeEvery(types.DELETE_POST, deletePost);
     yield takeLatest(types.ADD_POST,addPost);
+    //yield takeLatest('GET_POST', fetchData);
     yield all([
-        getPost()
+        actionWatcher()
     ]);
  }
 
