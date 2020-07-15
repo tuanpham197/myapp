@@ -26,6 +26,7 @@ class AddPost extends Component {
     };
     success = () => {
         message.success('Add post success');
+       
     };
     render() {   
         console.log(this.props.posts.post,"as");
@@ -94,6 +95,7 @@ const mapDispatchToProps = (dispatch,props) => {
         AddPost : (post)=>{
             dispatch(actions.addPost(post));
         },
+
     }
   }
 export default connect(mapStateToProps,mapDispatchToProps)(AddPost);

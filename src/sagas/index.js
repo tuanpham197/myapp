@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as types from '../constants/ActionTypes';
 import callApi from '../common/CallApi';
 import moment from 'moment';
+import postSaga from './postSaga'
 /***
  * call api to get data 
  * 
@@ -41,7 +42,7 @@ function* addPost(data)
     let post = {
         name : data.post.username,
         avatar : "anh.png",
-        createdAt: "2020-07-13T03:55:55.185Z"
+        createdAt: moment("2020-07-13T03:55:55.185Z").format('MM/DD/YYYY')
     };
     callApi('https://5f0d135111b7f6001605659d.mockapi.io/post','POST',post)
     .then(res=>{
@@ -56,7 +57,7 @@ function* addPost(data)
 export default function* rootSaga() {
     yield takeEvery(types.DELETE_POST, deletePost);
     yield takeLatest(types.ADD_POST,addPost);
-
+    yield fork(postSaga);
     yield all([
         actionWatcher()
     ]);
