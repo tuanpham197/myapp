@@ -2,25 +2,34 @@ import {cancel, fork, put, takeLatest,takeEvery, all ,delay} from 'redux-saga/ef
 import axios from 'axios';
 import * as types from '../constants/ActionTypes';
 import callApi from '../common/CallApi';
-
+import moment from 'moment';
+/***
+ * call api to get data 
+ * 
+ ***/
 function* fetchData(action){ 
     console.log(action,"call api");
-    yield delay(5000)
+    // yield delay(5000)
     var dataResponse = yield callApi('https://5f0d135111b7f6001605659d.mockapi.io/post','GET');
 
     yield put({type:'RECEIVE_POST',json :dataResponse.data});
 }
+/**
+ * 
+ */
 function* actionWatcher() {
     console.log("receive post -saga");
     yield takeLatest('GET_POST', fetchData);
 }
 function* deletePost(data)
 {
-    axios.delete('https://5f0d135111b7f6001605659d.mockapi.io/post/'+data.idPost)
+    yield axios.delete('https://5f0d135111b7f6001605659d.mockapi.io/post/'+data.idPost)
         .then(res=>{
-            console.log(res,"hello");
-        });
-
+            return res
+        })
+        .catch(error=>{
+            console.log(error);
+        })
 }
 /***
  * add new post
@@ -28,9 +37,7 @@ function* deletePost(data)
  * ***/
 function* addPost(data)
 {
-    console.log(data.post.createat._d);
 
-    
     let post = {
         name : data.post.username,
         avatar : "anh.png",
@@ -43,20 +50,13 @@ function* addPost(data)
     .catch(error=>{
         console.log(error);
     })
-    // axios.post('https://5f0d135111b7f6001605659d.mockapi.io/post', post)
-    //   .then(function (response) {
-    //     console.log(response);
 
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
 }
 
 export default function* rootSaga() {
     yield takeEvery(types.DELETE_POST, deletePost);
     yield takeLatest(types.ADD_POST,addPost);
-    //yield takeLatest('GET_POST', fetchData);
+
     yield all([
         actionWatcher()
     ]);
