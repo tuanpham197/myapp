@@ -1,7 +1,9 @@
 import * as types from '../constants/ActionTypes';
 
 var initialState = {
-    post : []
+    post : [],
+    loading : false,
+    status : false
 }
 
 const post = (state = initialState, action) => {
@@ -18,6 +20,7 @@ const post = (state = initialState, action) => {
         case types.ADD_POST:
             console.log(action,"hello");
             state.post = [...state.post,action.post];
+            state.status = true;
             return {...state}
         case types.DELETE_POST:
             const index = state.post.findIndex(element => element.id == action.idPost);

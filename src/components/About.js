@@ -29,7 +29,7 @@ class About extends Component {
           this.setState({
             numberPage :{
                 start: 0,
-                end : 7
+                end : 8
             }
           });
         } else {
@@ -71,7 +71,6 @@ class About extends Component {
         this.props.addTask(this.state.task);
     }
     render() {  
-  
 
         return ( 
             <div>

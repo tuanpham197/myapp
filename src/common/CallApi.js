@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const callApi = (url,method='GET',body)=>{
     return axios({
-        url: url,
-        method : method,
+        url,
+        method,
         data : body
     })
     .then(response=>{
