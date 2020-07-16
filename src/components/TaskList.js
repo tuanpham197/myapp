@@ -54,7 +54,6 @@ class TaskList extends Component {
     }
     
     render() {  
-        console.log(this.state);
         return (
             <Router>
                 <Layout>
@@ -89,18 +88,11 @@ class TaskList extends Component {
                         </Menu>
                         </Sider>
                         <Content style={{ padding: '0 24px', minHeight: 280 }}>
-                        {this.props.posts.loading ? <Example /> : <Switch>
-                            <Route path="/add" component={AddPost} />
-                            <Route path="/" component={About} />
-                               
-                        </Switch>}
-                        {/* <Pagination
-                            defaultCurrent={1}
-                            defaultPageSize={8}
-                            onChange={this.handleChangePage}
-                            total={15}
-                        /> */}
-                            
+                            {this.props.posts.loading ? <Example /> : <Switch>
+                                <Route path="/add" component={AddPost} />
+                                <Route path="/" component={About} />
+                                
+                            </Switch>}
                         </Content>
                     </Layout>
                     </Content>

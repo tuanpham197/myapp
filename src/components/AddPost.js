@@ -10,30 +10,24 @@ import {
     message
   } from 'antd';
 
-
+const success = () => {
+    console.log("message");
+    message.success('This is a success message');
+};
 class AddPost extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            result : false
-        }
-    }
-    handleSubmit = ()=>{
-        console.log("dast");
-    }
-    onFinish = values => {
-        this.props.AddPost(values);   
-    };
-    success = () => {
-        message.success('Add post success');
        
+    }
+
+    onFinish = values => {
+        this.props.AddPost(values);  
+        if(this.props.posts.status)
+            message.success('Add post success');
     };
-    render() {   
-        console.log(this.props.posts.post,"as");
+    render() {          
         return (
             <div>
-                {this.props.posts.status ? this.success() : ""}
-                
                 <Form
                     labelCol={{
                         span: 4,
@@ -95,7 +89,9 @@ const mapDispatchToProps = (dispatch,props) => {
         AddPost : (post)=>{
             dispatch(actions.addPost(post));
         },
-
+        changeStatus : ()=>{
+            dispatch(actions.changeStatus());
+        },
     }
   }
 export default connect(mapStateToProps,mapDispatchToProps)(AddPost);

@@ -8,3 +8,6 @@
 .center{
     margin: 0 auto;
 }
+.ant-layout.ant-layout-has-sider > .ant-layout, .ant-layout.ant-layout-has-sider > .ant-layout-content {
+    overflow-x: initial !important;
+}

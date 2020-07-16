@@ -16,7 +16,7 @@ module.exports = {
 			test: /\.(js|jsx)$/,
 			exclude: /node_modules/,
 			use: {
-			loader: "babel-loader"
+				loader: "babel-loader"
 			}
 		},
       	{
@@ -45,10 +45,7 @@ module.exports = {
 					options: {
 						lessOptions: { // If you are using less-loader@5 please spread the lessOptions to options directly
 							modifyVars: {
-								'primary-color': '#1DA57A',
-								'link-color': '#1DA57A',
-								'border-radius-base': '2px',
-								'border-color': '#fff'
+								// '@layout-body-background' : '#fff'
 							},
 							javascriptEnabled: true,
 						}

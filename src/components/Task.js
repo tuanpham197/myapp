@@ -15,7 +15,7 @@ class Task extends Component {
 
         return (
 
-            <Col span={6} xs={24} sm={12} md={12} lg={8} xl={6}>
+            <Col  xs={24} sm={24} md={12} lg={8} xl={6}>
                 <Card
                     hoverable
                     style={{ width: 240 }}

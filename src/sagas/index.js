@@ -4,16 +4,23 @@ import * as types from '../constants/ActionTypes';
 import callApi from '../common/CallApi';
 import moment from 'moment';
 import postSaga from './postSaga'
+
+function* watchAction1(){
+    yield console.log('action1');
+    yield console.log('action2');
+}
 /***
  * call api to get data 
  * 
  ***/
 function* fetchData(action){ 
     console.log(action,"call api");
-    // yield delay(5000)
+    
     var dataResponse = yield callApi('https://5f0d135111b7f6001605659d.mockapi.io/post','GET');
 
-    yield put({type:'RECEIVE_POST',json :dataResponse.data});
+    console.log(dataResponse);
+    if(dataResponse)
+        yield put({type:'RECEIVE_POST',json :dataResponse.data});
 }
 /**
  * 
@@ -42,8 +49,9 @@ function* addPost(data)
     let post = {
         name : data.post.username,
         avatar : "anh.png",
-        createdAt: moment("2020-07-13T03:55:55.185Z").format('MM/DD/YYYY')
+        createdAt: moment(data.post.createat._d).format('MM/DD/YYYY')
     };
+
     callApi('https://5f0d135111b7f6001605659d.mockapi.io/post','POST',post)
     .then(res=>{
         console.log(res,"add");
@@ -58,6 +66,9 @@ export default function* rootSaga() {
     yield takeEvery(types.DELETE_POST, deletePost);
     yield takeLatest(types.ADD_POST,addPost);
     yield fork(postSaga);
+    yield fork(watchAction1);
+ 
+    
     yield all([
         actionWatcher()
     ]);

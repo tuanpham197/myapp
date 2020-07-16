@@ -16,18 +16,21 @@ const post = (state = initialState, action) => {
             state.post = action.json;
             console.log("da co du lieu");
             state.loading = false;
-            return {...state} 
+            return {...state};
         case types.ADD_POST:
             console.log(action,"hello");
             state.post = [...state.post,action.post];
             state.status = true;
-            return {...state}
+            return {...state};
         case types.DELETE_POST:
             const index = state.post.findIndex(element => element.id == action.idPost);
             state.post.splice(index,1);
-            return {...state}
+            return {...state};
+        case types.CHANGE_STATUS:
+            state.status = false;
+            return {...state};
         default:
-            return {...state}
+            return {...state};
     }
 };
 export default post;

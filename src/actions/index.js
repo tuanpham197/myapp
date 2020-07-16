@@ -30,3 +30,8 @@ export const addPost = (post)=>{
         post
     }
 }
+export const changeStatus = ()=>{
+    return{
+        type : types.CHANGE_STATUS
+    }
+}
