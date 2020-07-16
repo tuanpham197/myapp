@@ -17,7 +17,7 @@ class Task extends Component {
     render() {   
 
         return (
-            <NavLink to="/a">
+          
                 <Col  xs={24} sm={24} md={12} lg={8} xl={6}>
                     <Card
                         hoverable
@@ -30,7 +30,7 @@ class Task extends Component {
                         </Button>
                     </Card>
                 </Col>
-            </NavLink>
+        
                 
         )
     }

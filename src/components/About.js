@@ -8,6 +8,7 @@ import * as actions from '../actions/index'
 import {   Row ,Pagination} from "antd";
 
 import ReactLoading from 'react-loading';
+import { NavLink } from 'react-router-dom';
 
 class About extends Component {
     constructor(props) {
@@ -41,17 +42,19 @@ class About extends Component {
           });
         }
       };
-    showTasks = ()=>{    
-        console.log("showTasks");
-        return this.props.posts.slice(this.state.numberPage.start,this.state.numberPage.end).map((e)=>{
-            return <Task
+    showTasks = ()=>{   
+        var {match} = this.props;
+        var url = match.url;
+        return this.props.posts.slice(this.state.numberPage.start,this.state.numberPage.end).map((e,index)=>{
+            return <NavLink to={`${url}/${e.slug}`} key = {index}>
+                <Task
                         id = {e.id}
                         name= {e.name}
-                        image= {e.avatar}
-                        key = {e.id}
+                        image= {e.avatar}   
                     >
 
                 </Task>
+            </NavLink>
         })
     }
     handleChange = (event)=>{
