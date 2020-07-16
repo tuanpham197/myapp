@@ -17,6 +17,8 @@ import {
 
 import { UserOutlined } from '@ant-design/icons';
 import About from './About';
+import routes from '../routes';
+import NotFound from './NotFound';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -52,7 +54,22 @@ class TaskList extends Component {
         event.preventDefault();
         this.props.addTask(this.state.task);
     }
-    
+    showContentMenu = (routes)=>{
+        var result = null;
+        if(routes.length > 0){
+            result = routes.map((ele,index)=>{
+                return <Route
+                        key={index}
+                        path={ele.path}
+                        exact = {ele.exact}
+                        component={ele.main}
+                    >
+
+                </Route>
+            })
+        }
+        return result;
+    }
     render() {  
         return (
             <Router>
@@ -89,9 +106,8 @@ class TaskList extends Component {
                         </Sider>
                         <Content style={{ padding: '0 24px', minHeight: 280 }}>
                             {this.props.posts.loading ? <Example /> : <Switch>
-                                <Route path="/add" component={AddPost} />
-                                <Route path="/" component={About} />
-                                
+                               
+                                {this.showContentMenu(routes)}
                             </Switch>}
                         </Content>
                     </Layout>

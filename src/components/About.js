@@ -71,7 +71,8 @@ class About extends Component {
         this.props.addTask(this.state.task);
     }
     render() {  
-
+        var {match} = this.props;
+        console.log(match,"Asdasd");
         return ( 
             <div>
                 <Row>

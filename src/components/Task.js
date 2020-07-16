@@ -3,6 +3,9 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { Card, Row, Col,Button } from "antd";
 import * as actions from '../actions/index'
+import {
+    NavLink
+  } from "react-router-dom";
 const { Meta } = Card;
 class Task extends Component {
     constructor(props) {
@@ -14,19 +17,21 @@ class Task extends Component {
     render() {   
 
         return (
-
-            <Col  xs={24} sm={24} md={12} lg={8} xl={6}>
-                <Card
-                    hoverable
-                    style={{ width: 240 }}
-                    cover={<img alt="example" src={this.props.image} />}
-                >
-                    <Meta title={this.props.name} description="" />
-                    <Button type="primary" danger style={{ marginTop: 10 }} onClick={()=>this.deletePost(this.props.id)}>
-                        Delete
-                    </Button>
-                </Card>
-            </Col>    
+            <NavLink to="/a">
+                <Col  xs={24} sm={24} md={12} lg={8} xl={6}>
+                    <Card
+                        hoverable
+                        style={{ width: 240 }}
+                        cover={<img alt="example" src={this.props.image} />}
+                    >
+                        <Meta title={this.props.name} description="" />
+                        <Button type="primary" danger style={{ marginTop: 10 }} onClick={()=>this.deletePost(this.props.id)}>
+                            Delete
+                        </Button>
+                    </Card>
+                </Col>
+            </NavLink>
+                
         )
     }
 }
