@@ -18,7 +18,6 @@ function* fetchData(action){
     
     var dataResponse = yield callApi('https://5f0d135111b7f6001605659d.mockapi.io/post','GET');
 
-    console.log(dataResponse);
     if(dataResponse)
         yield put({type:'RECEIVE_POST',json :dataResponse.data});
 }

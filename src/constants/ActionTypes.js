@@ -6,3 +6,4 @@ export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST ='ADD_POST';
 export const RECEIVE_POST = 'RECEIVE_POST';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
+export const GET_DETAIL_TASK = 'GET_DETAIL_TASK';

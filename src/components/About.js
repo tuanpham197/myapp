@@ -44,15 +44,16 @@ class About extends Component {
       };
     showTasks = ()=>{   
         var {match} = this.props;
-        var url = match.url;
+
         return this.props.posts.slice(this.state.numberPage.start,this.state.numberPage.end).map((e,index)=>{
-            return <NavLink to={`${url}/${e.slug}`} key = {index}>
+            var url = match.url;
+            url = url+"/"+e.id;
+            return <NavLink to={url} key = {index}>
                 <Task
                         id = {e.id}
                         name= {e.name}
                         image= {e.avatar}   
                     >
-
                 </Task>
             </NavLink>
         })

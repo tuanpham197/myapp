@@ -19,6 +19,7 @@ import { UserOutlined } from '@ant-design/icons';
 import About from './About';
 import routes from '../routes';
 import NotFound from './NotFound';
+import Task from './Task';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -77,7 +78,9 @@ class TaskList extends Component {
                     <Header className="header">
                     <div className="logo" />
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                        <Menu.Item key="1">Home</Menu.Item>
+                        <Menu.Item key="1">
+                            <Link to="/">Home </Link>
+                        </Menu.Item>
                         <Menu.Item key="2">About</Menu.Item>
                         <Menu.Item key="3">Link</Menu.Item>
                     </Menu>
@@ -94,7 +97,7 @@ class TaskList extends Component {
                         >
                             <SubMenu key="sub1" icon={<UserOutlined />} title="Options">
                                 <Menu.Item key="1">
-                                    <Link to="/">List </Link>
+                                    <Link to="/post">List </Link>
                                 </Menu.Item>
                                 <Menu.Item key="2">
                                     <Link to="/add">Add new</Link>
@@ -108,6 +111,7 @@ class TaskList extends Component {
                             {this.props.posts.loading ? <Example /> : <Switch>
                                
                                 {this.showContentMenu(routes)}
+                                
                             </Switch>}
                         </Content>
                     </Layout>

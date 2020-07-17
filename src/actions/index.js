@@ -35,3 +35,8 @@ export const changeStatus = ()=>{
         type : types.CHANGE_STATUS
     }
 }
+export const getDetailTask = (id)=>{
+    return {
+        type : types.GET_DETAIL_TASK,
+    }
+}
